@@ -2,8 +2,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
-  const attendance = document.getElementById("attendance").value;
-  const message = document.getElementById("message").value;
+  const phone = document.getElementById("phone").value;
+  const attendance = document.querySelector('input[name="attendance"]:checked').value;
+  const pax = document.getElementById("pax").value;
 
   fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
     method: "POST",
@@ -13,13 +14,14 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     },
     body: JSON.stringify({
       name: name,
+      phone: phone,
       attendance: attendance,
-      message: message
+      pax: pax
     })
   }).then(() => {
-    document.getElementById("responseMsg").innerText = "Thank you for your RSVP!";
+    document.getElementById("responseMsg").innerText = "Terima kasih atas maklum balas!";
     document.getElementById("rsvpForm").reset();
   }).catch(() => {
-    document.getElementById("responseMsg").innerText = "Something went wrong. Try again.";
+    document.getElementById("responseMsg").innerText = "Gagal hantar. Sila cuba lagi.";
   });
 });
