@@ -6,12 +6,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   const attendance = document.querySelector('input[name="attendance"]:checked').value;
   const pax = document.getElementById("pax").value;
 
-  // DEBUG: log values to browser console
-  console.log("name:", name);
-  console.log("phone:", phone);
-  console.log("attendance:", attendance);
-  console.log("pax:", pax);
-
   fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
     method: "POST",
     mode: "no-cors",
