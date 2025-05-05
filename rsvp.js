@@ -11,11 +11,15 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name, attendance, message })
+    body: JSON.stringify({
+      name: name,
+      attendance: attendance,
+      message: message
+    })
   }).then(() => {
     document.getElementById("responseMsg").innerText = "Thank you for your RSVP!";
     document.getElementById("rsvpForm").reset();
   }).catch(() => {
-    document.getElementById("responseMsg").innerText = "Failed to send RSVP. Try again.";
+    document.getElementById("responseMsg").innerText = "Something went wrong. Try again.";
   });
 });
