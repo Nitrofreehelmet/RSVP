@@ -51,6 +51,6 @@
     <p id="responseMsg" class="mt-3"></p>
   </div>
 
-  <script src="js/rsvp.js"></script>
+  <script src="rsvp.js"></script>
 </body>
 </html>
