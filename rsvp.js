@@ -1,27 +1,56 @@
-document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSVP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-white">
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const attendance = document.querySelector('input[name="attendance"]:checked').value;
-  const pax = document.getElementById("pax").value;
+  <div class="container mt-5">
+    <h2>RSVP to Our Wedding</h2>
+    <form id="rsvpForm">
+      <div class="mb-3">
+        <label class="form-label">Nama *</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
 
-  fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      name: name,
-      phone: phone,
-      attendance: attendance,
-      pax: pax
-    })
-  }).then(() => {
-    document.getElementById("responseMsg").innerText = "Terima kasih atas maklum balas!";
-    document.getElementById("rsvpForm").reset();
-  }).catch(() => {
-    document.getElementById("responseMsg").innerText = "Gagal hantar. Sila cuba lagi.";
-  });
-});
+      <div class="mb-3">
+        <label class="form-label">No Tel</label>
+        <input type="text" class="form-control" id="phone">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Kehadiran *</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="attendance" id="hadir" value="Hadir" required>
+          <label class="form-check-label" for="hadir">Hadir</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="attendance" id="tidak" value="Tidak Hadir">
+          <label class="form-check-label" for="tidak">Tidak Hadir</label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Jumlah Kehadiran (Pax) *</label>
+        <select class="form-select" id="pax" required>
+          <option value="">Sila Pilih</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <p id="responseMsg" class="mt-3"></p>
+  </div>
+
+  <script src="js/rsvp.js"></script>
+</body>
+</html>
