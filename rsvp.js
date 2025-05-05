@@ -11,19 +11,6 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     mode: "no-cors",
     headers: {
       "Content-Type": "application/json"
-    },document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const attendance = document.querySelector('input[name="attendance"]:checked').value;
-  const pax = document.getElementById("pax").value;
-
-  fetch("YOUR_GOOGLE_SCRIPT_URL_HERE", {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       name: name,
@@ -36,19 +23,5 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
     document.getElementById("rsvpForm").reset();
   }).catch(() => {
     document.getElementById("responseMsg").innerText = "Something went wrong. Try again.";
-  });
-});
-
-    body: JSON.stringify({
-      name: name,
-      phone: phone,
-      attendance: attendance,
-      pax: pax
-    })
-  }).then(() => {
-    document.getElementById("responseMsg").innerText = "Terima kasih atas maklum balas!";
-    document.getElementById("rsvpForm").reset();
-  }).catch(() => {
-    document.getElementById("responseMsg").innerText = "Gagal hantar. Sila cuba lagi.";
   });
 });
