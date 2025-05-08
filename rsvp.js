@@ -6,7 +6,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   const attendance = document.querySelector('input[name="attendance"]:checked').value;
   const pax = document.getElementById("pax").value;
 
-  fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
+  console.log("Sending:", { name, phone, attendance, pax }); // debug
+
+  fetch("YOUR_WEB_APP_URL", {
     method: "POST",
     mode: "no-cors",
     headers: {
