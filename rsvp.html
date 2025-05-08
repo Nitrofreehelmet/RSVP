@@ -10,49 +10,35 @@
   <div class="container mt-5">
     <h2>RSVP to Our Wedding</h2>
     <form id="rsvpForm">
-      <!-- Name (string) -->
       <div class="mb-3">
-        <label class="form-label">Nama *</label>
-        <input type="text" id="name" name="name" class="form-control" required>
+        <label>Nama</label>
+        <input type="text" id="name" class="form-control" required>
       </div>
 
-      <!-- Phone (number/integer) -->
       <div class="mb-3">
-        <label class="form-label">No Tel *</label>
-        <input type="number" id="phone" name="phone" class="form-control" required>
+        <label>No Tel</label>
+        <input type="text" id="phone" class="form-control" required>
       </div>
 
-      <!-- Attendance (char: H or T) -->
       <div class="mb-3">
-        <label class="form-label">Kehadiran *</label><br>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="attendance" value="H" required>
-          <label class="form-check-label">Hadir</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="attendance" value="T">
-          <label class="form-check-label">Tidak Hadir</label>
-        </div>
+        <label>Kehadiran</label><br>
+        <input type="radio" name="attendance" value="H" required> Hadir
+        <input type="radio" name="attendance" value="T"> Tidak Hadir
       </div>
 
-      <!-- Pax (integer) -->
       <div class="mb-3">
-        <label class="form-label">Jumlah Kehadiran (Pax) *</label>
-        <select class="form-select" id="pax" name="pax" required>
-          <option value="">Sila Pilih</option>
+        <label>Pax</label>
+        <select id="pax" class="form-select" required>
+          <option value="">-- Sila Pilih --</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
         </select>
       </div>
 
-      <!-- Submit -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <p id="responseMsg" class="mt-3 text-success fw-bold"></p>
+    <p id="responseMsg" class="mt-3"></p>
   </div>
 
   <script>
@@ -60,29 +46,25 @@
       e.preventDefault();
 
       const name = document.getElementById("name").value.trim();
-      const phone = parseInt(document.getElementById("phone").value);
+      const phone = document.getElementById("phone").value.trim();
       const attendance = document.querySelector('input[name="attendance"]:checked').value;
-      const pax = parseInt(document.getElementById("pax").value);
+      const pax = document.getElementById("pax").value;
 
-      console.log({ name, phone, attendance, pax }); // Debug
+      const data = { name, phone, attendance, pax };
+      console.log("SENDING", data);
 
-      fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
         method: "POST",
         mode: "no-cors",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          name: name,
-          phone: phone,
-          attendance: attendance,
-          pax: pax
-        })
+        body: JSON.stringify(data)
       }).then(() => {
-        document.getElementById("responseMsg").innerText = "Terima kasih! Kehadiran anda telah direkodkan.";
+        document.getElementById("responseMsg").innerText = "Terima kasih!";
         document.getElementById("rsvpForm").reset();
       }).catch(() => {
-        document.getElementById("responseMsg").innerText = "Ralat semasa menghantar. Sila cuba lagi.";
+        document.getElementById("responseMsg").innerText = "Ralat. Cuba lagi.";
       });
     });
   </script>
