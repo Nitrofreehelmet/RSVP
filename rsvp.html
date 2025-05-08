@@ -7,36 +7,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-white">
-
   <div class="container mt-5">
-    <h2 class="mb-4">RSVP to Our Wedding</h2>
+    <h2>RSVP to Our Wedding</h2>
     <form id="rsvpForm">
-      <!-- Name -->
+      <!-- Name (string) -->
       <div class="mb-3">
         <label class="form-label">Nama *</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+        <input type="text" id="name" name="name" class="form-control" required>
       </div>
 
-      <!-- Phone -->
+      <!-- Phone (number/integer) -->
       <div class="mb-3">
         <label class="form-label">No Tel *</label>
-        <input type="text" class="form-control" id="phone" name="phone" required>
+        <input type="number" id="phone" name="phone" class="form-control" required>
       </div>
 
-      <!-- Attendance -->
+      <!-- Attendance (char: H or T) -->
       <div class="mb-3">
         <label class="form-label">Kehadiran *</label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="attendance" id="hadir" value="Hadir" required>
-          <label class="form-check-label" for="hadir">Hadir</label>
+          <input class="form-check-input" type="radio" name="attendance" value="H" required>
+          <label class="form-check-label">Hadir</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="attendance" id="tidak" value="Tidak Hadir">
-          <label class="form-check-label" for="tidak">Tidak Hadir</label>
+          <input class="form-check-input" type="radio" name="attendance" value="T">
+          <label class="form-check-label">Tidak Hadir</label>
         </div>
       </div>
 
-      <!-- Pax -->
+      <!-- Pax (integer) -->
       <div class="mb-3">
         <label class="form-label">Jumlah Kehadiran (Pax) *</label>
         <select class="form-select" id="pax" name="pax" required>
@@ -45,7 +44,7 @@
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5+">5+</option>
+          <option value="5">5</option>
         </select>
       </div>
 
@@ -60,10 +59,12 @@
     document.getElementById("rsvpForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
+      const name = document.getElementById("name").value.trim();
+      const phone = parseInt(document.getElementById("phone").value);
       const attendance = document.querySelector('input[name="attendance"]:checked').value;
-      const pax = document.getElementById("pax").value;
+      const pax = parseInt(document.getElementById("pax").value);
+
+      console.log({ name, phone, attendance, pax }); // Debug
 
       fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
         method: "POST",
