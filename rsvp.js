@@ -6,9 +6,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
   const attendance = document.querySelector('input[name="attendance"]:checked').value;
   const pax = document.getElementById("pax").value;
 
-  console.log("Sending:", { name, phone, attendance, pax }); // debug
+  console.log({ name, phone, attendance, pax }); // DEBUG!
 
-  fetch("YOUR_WEB_APP_URL", {
+  fetch("https://script.google.com/macros/s/AKfycbz0Ij8WCz6Z6o5SSmrFs0oRwq-XSUACONhlF3K17ijp96lGeRoy-0w1DwbFGT8XBsPSLg/exec", {
     method: "POST",
     mode: "no-cors",
     headers: {
@@ -21,9 +21,9 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
       pax: pax
     })
   }).then(() => {
-    document.getElementById("responseMsg").innerText = "Thank you for your RSVP!";
+    document.getElementById("responseMsg").innerText = "Thank you!";
     document.getElementById("rsvpForm").reset();
   }).catch(() => {
-    document.getElementById("responseMsg").innerText = "Something went wrong. Try again.";
+    document.getElementById("responseMsg").innerText = "Something went wrong.";
   });
 });
